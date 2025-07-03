@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla de Casos de Prueba - OSPOS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+            font-size: 10px;
+        }
+        .header {
+            background-color: #d0d0d0;
+            padding: 8px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #000;
+        }
+        .info-section {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .info-box {
+            border: 1px solid #000;
+            padding: 5px;
+            margin-right: 5px;
+            background-color: #f5f5f5;
+        }
+        .info-box label {
+            font-weight: bold;
+            font-size: 9px;
+        }
+        .priority-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .priority-btn {
+            padding: 3px 8px;
+            border: 1px solid #000;
+            background-color: #e0e0e0;
+            text-align: center;
+            font-size: 8px;
+            cursor: pointer;
+        }
+        .priority-btn.selected {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .description-section {
+            display: flex;
+            margin-bottom: 10px;
+            gap: 5px;
+        }
+        .desc-box {
+            flex: 1;
+            border: 1px solid #000;
+            padding: 5px;
+            background-color: #f5f5f5;
+        }
+        .desc-box label {
+            font-weight: bold;
+            font-size: 9px;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .desc-box textarea {
+            width: 100%;
+            height: 60px;
+            border: none;
+            resize: vertical;
+            font-size: 9px;
+        }
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .test-table th {
+            background-color: #4a4a4a;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            font-size: 8px;
+            border: 1px solid #000;
+        }
+        .test-table td {
+            border: 1px solid #000;
+            padding: 3px;
+            font-size: 8px;
+            vertical-align: top;
+        }
+        .test-table tr:nth-child(even) {
+            background-color: #f0f0f0;
+        }
+        .test-table tr:nth-child(odd) {
+            background-color: #e8e8e8;
+        }
+        .id-column {
+            width: 60px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .desc-column {
+            width: 200px;
+        }
+        .date-column {
+            width: 80px;
+        }
+        .result-column {
+            width: 120px;
+        }
+        .status-column {
+            width: 100px;
+        }
+        .notes-column {
+            width: 150px;
+        }
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        input[type="text"], input[type="date"], textarea {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-size: 8px;
+        }
+        select {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-size: 8px;
+        }
+        .print-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .print-btn:hover {
+            background-color: #0056b3;
+        }
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            body {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">🖨️ Imprimir Plantilla</button>
+    
+    <div class="header">
+        PLANTILLA DE PLANIFICACIÓN Y EJECUCIÓN DE CASOS DE PRUEBA
+    </div>
+
+    <div class="info-section">
+        <div class="info-box" style="width: 200px;">
+            <label>TÍTULO DE LA PRUEBA:</label>
+            <input type="text" value="Pruebas de Calidad Sistema OSPOS">
+        </div>
+        <div class="info-box" style="width: 100px;">
+            <label>PRIORIDAD:</label>
+            <input type="text" value="ALTA">
+        </div>
+        <div class="info-box" style="width: 150px;">
+            <label>ID DE CASO DE PRUEBA:</label>
+            <input type="text" value="OSPOS-TC-001">
+        </div>
+        <div class="info-box" style="width: 120px;">
+            <label>NÚMERO DE PRUEBA:</label>
+            <input type="text" value="30">
+        </div>
+        <div class="info-box" style="width: 120px;">
+            <label>FECHA DE LA PRUEBA:</label>
+            <input type="date" value="2025-07-03">
+        </div>
+        <div class="priority-buttons">
+            <div class="priority-btn selected">BAJO</div>
+            <div class="priority-btn">MEDIO</div>
+            <div class="priority-btn">ALTO</div>
+        </div>
+    </div>
+
+    <div class="description-section">
+        <div class="desc-box">
+            <label>DESCRIPCIÓN DE LA PRUEBA:</label>
+            <textarea>Ejecución completa de pruebas funcionales y no funcionales para verificar la calidad del sistema OSPOS. Incluye pruebas de ventas, inventario, clientes, reportes, rendimiento, usabilidad y seguridad.</textarea>
+        </div>
+        <div class="desc-box">
+            <label>PRUEBA DISEÑADA POR:</label>
+            <input type="text" value="Analista QA">
+            <br><br>
+            <label>PRUEBA EJECUTADA POR:</label>
+            <input type="text" value="">
+        </div>
+        <div class="desc-box">
+            <label>FECHA DE EJECUCIÓN:</label>
+            <input type="date">
+        </div>
+    </div>
+
+    <div class="description-section">
+        <div class="desc-box">
+            <label>DESCRIPCIÓN DE LA PRUEBA:</label>
+            <textarea>Sistema de punto de venta OSPOS con funcionalidades completas de gestión comercial incluyendo ventas, inventario, clientes y reportes.</textarea>
+        </div>
+        <div class="desc-box">
+            <label>DEPENDENCIAS DE PRUEBA:</label>
+            <textarea>- Base de datos configurada
+- Productos cargados en inventario
+- Usuarios con permisos apropiados
+- Conexión a internet estable</textarea>
+        </div>
+        <div class="desc-box">
+            <label>CONDICIONES DE PRUEBA:</label>
+            <textarea>- Navegador Chrome actualizado
+- Resolución 1920x1080
+- Datos de prueba disponibles
+- Ambiente de testing funcional</textarea>
+        </div>
+        <div class="desc-box">
+            <label>CONTROL DE PRUEBAS:</label>
+            <textarea>- Verificar precondiciones antes de ejecutar
+- Documentar todos los resultados
+- Reportar defectos encontrados
+- Validar correcciones</textarea>
+        </div>
+    </div>
+
+    <table class="test-table">
+        <thead>
+            <tr>
+                <th class="id-column">ID DE PASO</th>
+                <th class="desc-column">DESCRIPCIÓN DEL PASO</th>
+                <th class="date-column">FECHA DE LA PRUEBA</th>
+                <th class="result-column">RESULTADOS ESPERADOS</th>
+                <th class="result-column">RESULTADOS REALES</th>
+                <th class="status-column">APROBAR / REPROBAR</th>
+                <th class="notes-column">NOTAS ADICIONALES</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- PRUEBAS FUNCIONALES -->
+            <tr>
+                <td class="id-column">PF001</td>
+                <td class="desc-column">Venta Básica - Verificar proceso completo de venta</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Venta procesada exitosamente con recibo generado</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF002</td>
+                <td class="desc-column">Aplicar Descuentos - Verificar aplicación de descuentos</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Descuento aplicado correctamente y total actualizado</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF003</td>
+                <td class="desc-column">Venta Múltiples Productos - Verificar venta con varios productos</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Venta procesada con cálculos correctos para todos los productos</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF004</td>
+                <td class="desc-column">Cancelar Venta - Verificar cancelación de venta en proceso</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Venta cancelada y carrito limpio</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF005</td>
+                <td class="desc-column">Venta Suspendida - Verificar suspensión y recuperación</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Venta suspendida y recuperada correctamente</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF006</td>
+                <td class="desc-column">Búsqueda por Código - Verificar búsqueda de productos por SKU</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Producto encontrado y agregado correctamente</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF007</td>
+                <td class="desc-column">Crear Producto - Verificar creación de productos nuevos</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Producto creado y visible en listado</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF008</td>
+                <td class="desc-column">Editar Producto - Verificar modificación de productos</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Cambios guardados correctamente</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF009</td>
+                <td class="desc-column">Eliminar Producto - Verificar eliminación de productos</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Producto eliminado del sistema</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF010</td>
+                <td class="desc-column">Actualización Stock - Verificar actualización automática</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Stock reducido correctamente tras venta</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF011</td>
+                <td class="desc-column">Búsqueda Productos - Verificar búsqueda en inventario</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Resultados filtrados correctamente</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF012</td>
+                <td class="desc-column">Registrar Cliente - Verificar creación de nuevos clientes</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Cliente creado y disponible para selección</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF013</td>
+                <td class="desc-column">Buscar Cliente - Verificar búsqueda de clientes</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Cliente seleccionado correctamente</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF014</td>
+                <td class="desc-column">Editar Cliente - Verificar modificación de datos</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Información actualizada correctamente</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF015</td>
+                <td class="desc-column">Reporte Ventas - Verificar reporte de ventas diarias</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Reporte generado con ventas del día</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF016</td>
+                <td class="desc-column">Reporte Inventario - Verificar reporte de stock</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Reporte con stock actual correcto</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF017</td>
+                <td class="desc-column">Exportar Reportes - Verificar exportación</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Reporte exportado correctamente</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF018</td>
+                <td class="desc-column">Kits de Artículos - Verificar creación y venta de kits</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Kit creado y vendido como conjunto</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF019</td>
+                <td class="desc-column">Gestión Proveedores - Verificar administración</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Proveedor creado y asociado correctamente</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="id-column">PF020</td>
+                <td class="desc-column">Configuración Sistema - Verificar configuraciones</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Configuración actualizada correctamente</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            
+            <!-- PRUEBAS NO FUNCIONALES -->
+            <tr style="background-color: #e3f2fd;">
+                <td class="id-column">PNF001</td>
+                <td class="desc-column">Tiempo Carga - Verificar tiempo de carga de página</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Carga completa < 3 segundos</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr style="background-color: #e3f2fd;">
+                <td class="id-column">PNF002</td>
+                <td class="desc-column">Velocidad Búsqueda - Verificar tiempo de búsqueda</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Búsqueda < 2 segundos</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr style="background-color: #e3f2fd;">
+                <td class="id-column">PNF003</td>
+                <td class="desc-column">Procesamiento Venta - Verificar tiempo de venta</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Venta procesada < 5 segundos</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr style="background-color: #e3f2fd;">
+                <td class="id-column">PNF004</td>
+                <td class="desc-column">Navegación Intuitiva - Verificar usabilidad</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Venta completada < 5 minutos sin asistencia</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="REPROBADO">REPROBADO</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                    </select>
+                </td>
+                <td class="notes-column"><input type="text"></td>
+            </tr>
+            <tr style="background-color: #e3f2fd;">
+                <td class="id-column">PNF005</td>
+                <td class="desc-column">Accesibilidad - Verificar navegación por teclado</td>
+                <td class="date-column"><input type="date"></td>
+                <td class="result-column">Interfaz navegable por teclado</td>
+                <td class="result-column"><input type="text"></td>
+                <td class="status-column">
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="APROBADO">APROBADO</option>
+                        <option value="
